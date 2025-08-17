@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impara Hangul Coreano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        .korean-font { font-family: 'Noto Sans KR', sans-serif; }
+        .card-flip {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-indigo-100 min-h-screen korean-font">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800 mb-2">한글 배우기</h1>
+            <p class="text-lg text-gray-700">Impara l'Hangul Coreano</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="flex justify-center mb-8">
+            <div class="bg-white rounded-full p-2 shadow-lg">
+                <button id="studyBtn" class="px-6 py-3 rounded-full bg-blue-600 text-white font-medium transition-all">
+                    📚 Studio
+                </button>
+                <button id="practiceBtn" class="px-6 py-3 rounded-full text-blue-600 font-medium transition-all hover:bg-blue-50">
+                    🎯 Esercizi
+                </button>
+            </div>
+        </nav>
+
+        <!-- Study Section -->
+        <div id="studySection" class="space-y-8">
+            <!-- Script Type Selector -->
+            <div class="flex justify-center mb-6">
+                <div class="bg-white rounded-lg p-2 shadow-md flex flex-wrap gap-1">
+                    <button id="consonantsBtn" class="px-4 py-2 rounded-md bg-blue-500 text-white font-medium text-sm">
+                        자음 Consonanti
+                    </button>
+                    <button id="vowelsBtn" class="px-4 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm">
+                        모음 Vocali
+                    </button>
+                    <button id="syllablesBtn" class="px-4 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm">
+                        음절 Sillabe
+                    </button>
+                </div>
+            </div>
+
+            <!-- Display Mode Selector -->
+            <div class="flex justify-center mb-6">
+                <div class="bg-white rounded-lg p-2 shadow-md">
+                    <button id="simpleBtn" class="px-4 py-2 rounded-md bg-indigo-500 text-white font-medium">
+                        Semplice
+                    </button>
+                    <button id="detailedBtn" class="px-4 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50">
+                        Dettagliato
+                    </button>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="text-center mb-6">
+                <p id="scriptInfo" class="text-lg text-gray-600">자음 - Consonanti dell'hangul</p>
+                <p id="displayInfo" class="text-sm text-gray-500 mt-2">Visualizzazione semplice</p>
+            </div>
+
+            <!-- Character Grid -->
+            <div id="characterGrid" class="grid grid-cols-4 md:grid-cols-7 gap-4 max-w-6xl mx-auto">
+                <!-- Characters will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Practice Section -->
+        <div id="practiceSection" class="hidden">
+            <div class="max-w-2xl mx-auto">
+                <!-- Practice Mode Selector -->
+                <div class="flex justify-center mb-6">
+                    <div class="bg-white rounded-lg p-2 shadow-md flex flex-wrap gap-1">
+                        <button id="recognitionBtn" class="px-3 py-2 rounded-md bg-indigo-500 text-white font-medium text-sm">
+                            🔍 Riconoscimento
+                        </button>
+                        <button id="writingBtn" class="px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm">
+                            ✍️ Scrittura
+                        </button>
+                        <button id="compositionBtn" class="px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm">
+                            🔧 Composizione
+                        </button>
+                        <button id="decompositionBtn" class="px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm">
+                            🔄 Scomposizione
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Script Selector for Practice -->
+                <div class="flex justify-center mb-6">
+                    <div class="bg-white rounded-lg p-2 shadow-md flex flex-wrap gap-1">
+                        <button id="practiceConsonantsBtn" class="px-3 py-2 rounded-md bg-blue-500 text-white font-medium text-sm">
+                            자음
+                        </button>
+                        <button id="practiceVowelsBtn" class="px-3 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm">
+                            모음
+                        </button>
+                        <button id="practiceSyllablesBtn" class="px-3 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm">
+                            음절
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Practice Card -->
+                <div id="practiceCard" class="bg-white rounded-xl shadow-xl p-8 text-center">
+                    <div class="mb-6">
+                        <div id="questionText" class="text-6xl mb-4 korean-font">ㄱ</div>
+                        <div id="questionPrompt" class="text-lg text-gray-600">Come si pronuncia questo carattere?</div>
+                    </div>
+
+                    <!-- Answer Options -->
+                    <div id="answerOptions" class="grid grid-cols-2 gap-4 mb-6">
+                        <!-- Options will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Writing Input -->
+                    <div id="writingInput" class="hidden mb-6">
+                        <input type="text" id="writingAnswer" class="w-full p-4 text-center text-2xl border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none" placeholder="Scrivi la romanizzazione...">
+                    </div>
+
+                    <!-- Composition Interface -->
+                    <div id="compositionInterface" class="hidden mb-6">
+                        <div class="mb-4">
+                            <div class="text-lg text-gray-600 mb-2">Seleziona consonante e vocale:</div>
+                            <div class="flex justify-center space-x-4 mb-4">
+                                <select id="consonantSelect" class="p-2 border rounded-lg korean-font text-xl">
+                                    <option value="">Consonante</option>
+                                </select>
+                                <select id="vowelSelect" class="p-2 border rounded-lg korean-font text-xl">
+                                    <option value="">Vocale</option>
+                                </select>
+                            </div>
+                            <div id="compositionResult" class="text-4xl korean-font mb-4">?</div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div id="feedback" class="hidden mb-6 p-4 rounded-lg">
+                        <div id="feedbackText" class="text-lg font-medium"></div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex justify-center space-x-4">
+                        <button id="nextBtn" class="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                            Prossimo →
+                        </button>
+                        <button id="checkBtn" class="hidden px-6 py-3 bg-indigo-500 text-white rounded-lg font-medium hover:bg-indigo-600 transition-colors">
+                            Controlla
+                        </button>
+                        <button id="composeBtn" class="hidden px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors">
+                            Componi
+                        </button>
+                    </div>
+
+                    <!-- Score and Progress -->
+                    <div class="mt-6 space-y-2">
+                        <div class="text-sm text-gray-600">
+                            Punteggio: <span id="score">0</span>/<span id="total">0</span>
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            <span id="exerciseInfo">Consonanti: 19 caratteri disponibili</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Korean character data
+        const consonants = {
+            'ㄱ': 'g/k', 'ㄴ': 'n', 'ㄷ': 'd/t', 'ㄹ': 'r/l', 'ㅁ': 'm',
+            'ㅂ': 'b/p', 'ㅅ': 's', 'ㅇ': 'ng/silent', 'ㅈ': 'j', 'ㅊ': 'ch',
+            'ㅋ': 'k', 'ㅌ': 't', 'ㅍ': 'p', 'ㅎ': 'h', 'ㄲ': 'kk',
+            'ㄸ': 'tt', 'ㅃ': 'pp', 'ㅆ': 'ss', 'ㅉ': 'jj'
+        };
+
+        const vowels = {
+            'ㅏ': 'a', 'ㅑ': 'ya', 'ㅓ': 'eo', 'ㅕ': 'yeo', 'ㅗ': 'o',
+            'ㅛ': 'yo', 'ㅜ': 'u', 'ㅠ': 'yu', 'ㅡ': 'eu', 'ㅣ': 'i',
+            'ㅐ': 'ae', 'ㅒ': 'yae', 'ㅔ': 'e', 'ㅖ': 'ye', 'ㅘ': 'wa',
+            'ㅙ': 'wae', 'ㅚ': 'oe', 'ㅝ': 'wo', 'ㅞ': 'we', 'ㅟ': 'wi',
+            'ㅢ': 'ui'
+        };
+
+        const syllables = {
+            '가': { consonant: 'ㄱ', vowel: 'ㅏ', romanization: 'ga' },
+            '나': { consonant: 'ㄴ', vowel: 'ㅏ', romanization: 'na' },
+            '다': { consonant: 'ㄷ', vowel: 'ㅏ', romanization: 'da' },
+            '라': { consonant: 'ㄹ', vowel: 'ㅏ', romanization: 'ra' },
+            '마': { consonant: 'ㅁ', vowel: 'ㅏ', romanization: 'ma' },
+            '바': { consonant: 'ㅂ', vowel: 'ㅏ', romanization: 'ba' },
+            '사': { consonant: 'ㅅ', vowel: 'ㅏ', romanization: 'sa' },
+            '아': { consonant: 'ㅇ', vowel: 'ㅏ', romanization: 'a' },
+            '자': { consonant: 'ㅈ', vowel: 'ㅏ', romanization: 'ja' },
+            '차': { consonant: 'ㅊ', vowel: 'ㅏ', romanization: 'cha' },
+            '카': { consonant: 'ㅋ', vowel: 'ㅏ', romanization: 'ka' },
+            '타': { consonant: 'ㅌ', vowel: 'ㅏ', romanization: 'ta' },
+            '파': { consonant: 'ㅍ', vowel: 'ㅏ', romanization: 'pa' },
+            '하': { consonant: 'ㅎ', vowel: 'ㅏ', romanization: 'ha' },
+            '고': { consonant: 'ㄱ', vowel: 'ㅗ', romanization: 'go' },
+            '노': { consonant: 'ㄴ', vowel: 'ㅗ', romanization: 'no' },
+            '도': { consonant: 'ㄷ', vowel: 'ㅗ', romanization: 'do' },
+            '로': { consonant: 'ㄹ', vowel: 'ㅗ', romanization: 'ro' },
+            '모': { consonant: 'ㅁ', vowel: 'ㅗ', romanization: 'mo' },
+            '보': { consonant: 'ㅂ', vowel: 'ㅗ', romanization: 'bo' }
+        };
+
+        // State
+        let currentScript = 'consonants';
+        let currentMode = 'study';
+        let displayMode = 'simple';
+        let practiceMode = 'recognition';
+        let practiceScript = 'consonants';
+        let currentQuestion = null;
+        let score = 0;
+        let total = 0;
+
+        // DOM elements
+        const studyBtn = document.getElementById('studyBtn');
+        const practiceBtn = document.getElementById('practiceBtn');
+        const studySection = document.getElementById('studySection');
+        const practiceSection = document.getElementById('practiceSection');
+        const consonantsBtn = document.getElementById('consonantsBtn');
+        const vowelsBtn = document.getElementById('vowelsBtn');
+        const syllablesBtn = document.getElementById('syllablesBtn');
+        const simpleBtn = document.getElementById('simpleBtn');
+        const detailedBtn = document.getElementById('detailedBtn');
+        const scriptInfo = document.getElementById('scriptInfo');
+        const displayInfo = document.getElementById('displayInfo');
+        const characterGrid = document.getElementById('characterGrid');
+        const recognitionBtn = document.getElementById('recognitionBtn');
+        const writingBtn = document.getElementById('writingBtn');
+        const compositionBtn = document.getElementById('compositionBtn');
+        const decompositionBtn = document.getElementById('decompositionBtn');
+        const practiceConsonantsBtn = document.getElementById('practiceConsonantsBtn');
+        const practiceVowelsBtn = document.getElementById('practiceVowelsBtn');
+        const practiceSyllablesBtn = document.getElementById('practiceSyllablesBtn');
+        const practiceCard = document.getElementById('practiceCard');
+        const questionText = document.getElementById('questionText');
+        const questionPrompt = document.getElementById('questionPrompt');
+        const answerOptions = document.getElementById('answerOptions');
+        const writingInput = document.getElementById('writingInput');
+        const writingAnswer = document.getElementById('writingAnswer');
+        const compositionInterface = document.getElementById('compositionInterface');
+        const consonantSelect = document.getElementById('consonantSelect');
+        const vowelSelect = document.getElementById('vowelSelect');
+        const compositionResult = document.getElementById('compositionResult');
+        const feedback = document.getElementById('feedback');
+        const feedbackText = document.getElementById('feedbackText');
+        const nextBtn = document.getElementById('nextBtn');
+        const checkBtn = document.getElementById('checkBtn');
+        const composeBtn = document.getElementById('composeBtn');
+        const scoreSpan = document.getElementById('score');
+        const totalSpan = document.getElementById('total');
+        const exerciseInfo = document.getElementById('exerciseInfo');
+
+        // Event listeners
+        studyBtn.addEventListener('click', () => switchMode('study'));
+        practiceBtn.addEventListener('click', () => switchMode('practice'));
+        consonantsBtn.addEventListener('click', () => switchScript('consonants'));
+        vowelsBtn.addEventListener('click', () => switchScript('vowels'));
+        syllablesBtn.addEventListener('click', () => switchScript('syllables'));
+        simpleBtn.addEventListener('click', () => switchDisplayMode('simple'));
+        detailedBtn.addEventListener('click', () => switchDisplayMode('detailed'));
+        recognitionBtn.addEventListener('click', () => switchPracticeMode('recognition'));
+        writingBtn.addEventListener('click', () => switchPracticeMode('writing'));
+        compositionBtn.addEventListener('click', () => switchPracticeMode('composition'));
+        decompositionBtn.addEventListener('click', () => switchPracticeMode('decomposition'));
+        practiceConsonantsBtn.addEventListener('click', () => switchPracticeScript('consonants'));
+        practiceVowelsBtn.addEventListener('click', () => switchPracticeScript('vowels'));
+        practiceSyllablesBtn.addEventListener('click', () => switchPracticeScript('syllables'));
+        nextBtn.addEventListener('click', nextQuestion);
+        checkBtn.addEventListener('click', checkWritingAnswer);
+        composeBtn.addEventListener('click', checkComposition);
+        consonantSelect.addEventListener('change', updateComposition);
+        vowelSelect.addEventListener('change', updateComposition);
+        writingAnswer.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkWritingAnswer();
+        });
+
+        // Functions
+        function switchMode(mode) {
+            currentMode = mode;
+            if (mode === 'study') {
+                studyBtn.className = 'px-6 py-3 rounded-full bg-blue-600 text-white font-medium transition-all';
+                practiceBtn.className = 'px-6 py-3 rounded-full text-blue-600 font-medium transition-all hover:bg-blue-50';
+                studySection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                renderCharacterGrid();
+            } else {
+                practiceBtn.className = 'px-6 py-3 rounded-full bg-blue-600 text-white font-medium transition-all';
+                studyBtn.className = 'px-6 py-3 rounded-full text-blue-600 font-medium transition-all hover:bg-blue-50';
+                studySection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                startPractice();
+            }
+        }
+
+        function switchScript(script) {
+            currentScript = script;
+            // Reset buttons
+            consonantsBtn.className = 'px-4 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm';
+            vowelsBtn.className = 'px-4 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm';
+            syllablesBtn.className = 'px-4 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm';
+            
+            if (script === 'consonants') {
+                consonantsBtn.className = 'px-4 py-2 rounded-md bg-blue-500 text-white font-medium text-sm';
+                scriptInfo.textContent = '자음 - Consonanti dell\'hangul';
+            } else if (script === 'vowels') {
+                vowelsBtn.className = 'px-4 py-2 rounded-md bg-blue-500 text-white font-medium text-sm';
+                scriptInfo.textContent = '모음 - Vocali dell\'hangul';
+            } else if (script === 'syllables') {
+                syllablesBtn.className = 'px-4 py-2 rounded-md bg-blue-500 text-white font-medium text-sm';
+                scriptInfo.textContent = '음절 - Sillabe composte';
+            }
+            renderCharacterGrid();
+        }
+
+        function switchDisplayMode(mode) {
+            displayMode = mode;
+            if (mode === 'simple') {
+                simpleBtn.className = 'px-4 py-2 rounded-md bg-indigo-500 text-white font-medium';
+                detailedBtn.className = 'px-4 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50';
+                displayInfo.textContent = 'Visualizzazione semplice';
+            } else {
+                detailedBtn.className = 'px-4 py-2 rounded-md bg-indigo-500 text-white font-medium';
+                simpleBtn.className = 'px-4 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50';
+                displayInfo.textContent = 'Visualizzazione dettagliata con informazioni extra';
+            }
+            renderCharacterGrid();
+        }
+
+        function switchPracticeMode(mode) {
+            practiceMode = mode;
+            // Reset buttons
+            recognitionBtn.className = 'px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm';
+            writingBtn.className = 'px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm';
+            compositionBtn.className = 'px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm';
+            decompositionBtn.className = 'px-3 py-2 rounded-md text-indigo-500 font-medium hover:bg-indigo-50 text-sm';
+            
+            if (mode === 'recognition') {
+                recognitionBtn.className = 'px-3 py-2 rounded-md bg-indigo-500 text-white font-medium text-sm';
+            } else if (mode === 'writing') {
+                writingBtn.className = 'px-3 py-2 rounded-md bg-indigo-500 text-white font-medium text-sm';
+            } else if (mode === 'composition') {
+                compositionBtn.className = 'px-3 py-2 rounded-md bg-indigo-500 text-white font-medium text-sm';
+            } else if (mode === 'decomposition') {
+                decompositionBtn.className = 'px-3 py-2 rounded-md bg-indigo-500 text-white font-medium text-sm';
+            }
+            startPractice();
+        }
+
+        function switchPracticeScript(script) {
+            practiceScript = script;
+            // Reset buttons
+            practiceConsonantsBtn.className = 'px-3 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm';
+            practiceVowelsBtn.className = 'px-3 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm';
+            practiceSyllablesBtn.className = 'px-3 py-2 rounded-md text-blue-500 font-medium hover:bg-blue-50 text-sm';
+            
+            if (script === 'consonants') {
+                practiceConsonantsBtn.className = 'px-3 py-2 rounded-md bg-blue-500 text-white font-medium text-sm';
+            } else if (script === 'vowels') {
+                practiceVowelsBtn.className = 'px-3 py-2 rounded-md bg-blue-500 text-white font-medium text-sm';
+            } else if (script === 'syllables') {
+                practiceSyllablesBtn.className = 'px-3 py-2 rounded-md bg-blue-500 text-white font-medium text-sm';
+            }
+            updateExerciseInfo();
+            startPractice();
+        }
+
+        function renderCharacterGrid() {
+            characterGrid.innerHTML = '';
+            let data;
+            
+            if (currentScript === 'consonants') {
+                data = consonants;
+            } else if (currentScript === 'vowels') {
+                data = vowels;
+            } else if (currentScript === 'syllables') {
+                data = syllables;
+            }
+            
+            Object.entries(data).forEach(([char, info]) => {
+                const card = document.createElement('div');
+                
+                if (displayMode === 'simple') {
+                    card.className = 'bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow cursor-pointer card-flip min-h-[130px] flex flex-col justify-center';
+                    
+                    if (currentScript === 'syllables') {
+                        card.innerHTML = `
+                            <div class="card-front">
+                                <div class="text-6xl mb-3 korean-font font-bold text-black">${char}</div>
+                                <div class="text-lg font-semibold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">${info.romanization}</div>
+                            </div>
+                            <div class="card-back bg-indigo-50 rounded-lg p-6 flex flex-col justify-center">
+                                <div class="text-3xl mb-3 text-indigo-700 font-bold">${info.romanization}</div>
+                                <div class="text-5xl korean-font font-bold text-indigo-600">${char}</div>
+                                <div class="text-sm text-indigo-600 mt-2">${info.consonant} + ${info.vowel}</div>
+                            </div>
+                        `;
+                    } else {
+                        card.innerHTML = `
+                            <div class="card-front">
+                                <div class="text-6xl mb-3 korean-font font-bold text-black">${char}</div>
+                                <div class="text-lg font-semibold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">${info}</div>
+                            </div>
+                            <div class="card-back bg-indigo-50 rounded-lg p-6 flex flex-col justify-center">
+                                <div class="text-3xl mb-3 text-indigo-700 font-bold">${info}</div>
+                                <div class="text-5xl korean-font font-bold text-indigo-600">${char}</div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    card.className = 'bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow cursor-pointer card-flip min-h-[160px] flex flex-col justify-center';
+                    
+                    if (currentScript === 'syllables') {
+                        card.innerHTML = `
+                            <div class="card-front">
+                                <div class="text-5xl mb-2 korean-font font-bold text-black">${char}</div>
+                                <div class="text-sm font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full mb-2">${info.romanization}</div>
+                                <div class="text-xs text-gray-600">
+                                    <div>Consonante: ${info.consonant}</div>
+                                    <div>Vocale: ${info.vowel}</div>
+                                </div>
+                            </div>
+                            <div class="card-back bg-indigo-50 rounded-lg p-4 flex flex-col justify-center">
+                                <div class="text-2xl mb-2 text-indigo-700 font-bold">${info.romanization}</div>
+                                <div class="text-4xl korean-font font-bold text-indigo-600 mb-2">${char}</div>
+                                <div class="text-sm text-indigo-600">${info.consonant} + ${info.vowel}</div>
+                            </div>
+                        `;
+                    } else {
+                        const type = currentScript === 'consonants' ? 'Consonante' : 'Vocale';
+                        card.innerHTML = `
+                            <div class="card-front">
+                                <div class="text-5xl mb-2 korean-font font-bold text-black">${char}</div>
+                                <div class="text-sm font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full mb-2">${info}</div>
+                                <div class="text-xs text-gray-600">${type}</div>
+                            </div>
+                            <div class="card-back bg-indigo-50 rounded-lg p-4 flex flex-col justify-center">
+                                <div class="text-2xl mb-2 text-indigo-700 font-bold">${info}</div>
+                                <div class="text-4xl korean-font font-bold text-indigo-600 mb-2">${char}</div>
+                                <div class="text-sm text-indigo-600">${type}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                });
+                
+                characterGrid.appendChild(card);
+            });
+        }
+
+        function startPractice() {
+            score = 0;
+            total = 0;
+            updateScore();
+            updateExerciseInfo();
+            setupCompositionSelects();
+            nextQuestion();
+        }
+
+        function setupCompositionSelects() {
+            consonantSelect.innerHTML = '<option value="">Consonante</option>';
+            vowelSelect.innerHTML = '<option value="">Vocale</option>';
+            
+            Object.keys(consonants).forEach(consonant => {
+                const option = document.createElement('option');
+                option.value = consonant;
+                option.textContent = consonant;
+                consonantSelect.appendChild(option);
+            });
+            
+            Object.keys(vowels).forEach(vowel => {
+                const option = document.createElement('option');
+                option.value = vowel;
+                option.textContent = vowel;
+                vowelSelect.appendChild(option);
+            });
+        }
+
+        function updateComposition() {
+            const consonant = consonantSelect.value;
+            const vowel = vowelSelect.value;
+            
+            if (consonant && vowel) {
+                // Simple syllable composition (this is a simplified version)
+                const syllableMap = {
+                    'ㄱㅏ': '가', 'ㄱㅓ': '거', 'ㄱㅗ': '고', 'ㄱㅜ': '구', 'ㄱㅡ': '그', 'ㄱㅣ': '기',
+                    'ㄴㅏ': '나', 'ㄴㅓ': '너', 'ㄴㅗ': '노', 'ㄴㅜ': '누', 'ㄴㅡ': '느', 'ㄴㅣ': '니',
+                    'ㄷㅏ': '다', 'ㄷㅓ': '더', 'ㄷㅗ': '도', 'ㄷㅜ': '두', 'ㄷㅡ': '드', 'ㄷㅣ': '디',
+                    'ㄹㅏ': '라', 'ㄹㅓ': '러', 'ㄹㅗ': '로', 'ㄹㅜ': '루', 'ㄹㅡ': '르', 'ㄹㅣ': '리',
+                    'ㅁㅏ': '마', 'ㅁㅓ': '머', 'ㅁㅗ': '모', 'ㅁㅜ': '무', 'ㅁㅡ': '므', 'ㅁㅣ': '미',
+                    'ㅂㅏ': '바', 'ㅂㅓ': '버', 'ㅂㅗ': '보', 'ㅂㅜ': '부', 'ㅂㅡ': '브', 'ㅂㅣ': '비',
+                    'ㅅㅏ': '사', 'ㅅㅓ': '서', 'ㅅㅗ': '소', 'ㅅㅜ': '수', 'ㅅㅡ': '스', 'ㅅㅣ': '시',
+                    'ㅇㅏ': '아', 'ㅇㅓ': '어', 'ㅇㅗ': '오', 'ㅇㅜ': '우', 'ㅇㅡ': '으', 'ㅇㅣ': '이',
+                    'ㅈㅏ': '자', 'ㅈㅓ': '저', 'ㅈㅗ': '조', 'ㅈㅜ': '주', 'ㅈㅡ': '즈', 'ㅈㅣ': '지',
+                    'ㅊㅏ': '차', 'ㅊㅓ': '처', 'ㅊㅗ': '초', 'ㅊㅜ': '추', 'ㅊㅡ': '츠', 'ㅊㅣ': '치',
+                    'ㅋㅏ': '카', 'ㅋㅓ': '커', 'ㅋㅗ': '코', 'ㅋㅜ': '쿠', 'ㅋㅡ': '크', 'ㅋㅣ': '키',
+                    'ㅌㅏ': '타', 'ㅌㅓ': '터', 'ㅌㅗ': '토', 'ㅌㅜ': '투', 'ㅌㅡ': '트', 'ㅌㅣ': '티',
+                    'ㅍㅏ': '파', 'ㅍㅓ': '퍼', 'ㅍㅗ': '포', 'ㅍㅜ': '푸', 'ㅍㅡ': '프', 'ㅍㅣ': '피',
+                    'ㅎㅏ': '하', 'ㅎㅓ': '허', 'ㅎㅗ': '호', 'ㅎㅜ': '후', 'ㅎㅡ': '흐', 'ㅎㅣ': '히'
+                };
+                
+                const key = consonant + vowel;
+                const result = syllableMap[key] || '?';
+                compositionResult.textContent = result;
+            } else {
+                compositionResult.textContent = '?';
+            }
+        }
+
+        function nextQuestion() {
+            let data;
+            if (practiceScript === 'consonants') {
+                data = consonants;
+            } else if (practiceScript === 'vowels') {
+                data = vowels;
+            } else if (practiceScript === 'syllables') {
+                data = syllables;
+            }
+            
+            const charArray = Object.entries(data);
+            const randomChar = charArray[Math.floor(Math.random() * charArray.length)];
+            
+            currentQuestion = {
+                char: randomChar[0],
+                data: randomChar[1]
+            };
+
+            feedback.classList.add('hidden');
+            
+            if (practiceMode === 'recognition') {
+                setupRecognitionQuestion();
+            } else if (practiceMode === 'writing') {
+                setupWritingQuestion();
+            } else if (practiceMode === 'composition') {
+                setupCompositionQuestion();
+            } else if (practiceMode === 'decomposition') {
+                setupDecompositionQuestion();
+            }
+        }
+
+        function setupRecognitionQuestion() {
+            questionText.textContent = currentQuestion.char;
+            questionPrompt.textContent = 'Come si pronuncia questo carattere?';
+            answerOptions.classList.remove('hidden');
+            writingInput.classList.add('hidden');
+            compositionInterface.classList.add('hidden');
+            nextBtn.classList.remove('hidden');
+            checkBtn.classList.add('hidden');
+            composeBtn.classList.add('hidden');
+
+            let correctAnswer, allAnswers;
+            if (practiceScript === 'syllables') {
+                correctAnswer = currentQuestion.data.romanization;
+                allAnswers = Object.values(syllables).map(s => s.romanization);
+            } else {
+                correctAnswer = currentQuestion.data;
+                if (practiceScript === 'consonants') {
+                    allAnswers = Object.values(consonants);
+                } else {
+                    allAnswers = Object.values(vowels);
+                }
+            }
+
+            const options = [correctAnswer];
+            while (options.length < 4) {
+                const randomAnswer = allAnswers[Math.floor(Math.random() * allAnswers.length)];
+                if (!options.includes(randomAnswer)) {
+                    options.push(randomAnswer);
+                }
+            }
+            
+            options.sort(() => Math.random() - 0.5);
+            
+            answerOptions.innerHTML = '';
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium';
+                button.textContent = option;
+                button.addEventListener('click', () => checkRecognitionAnswer(option, correctAnswer));
+                answerOptions.appendChild(button);
+            });
+        }
+
+        function setupWritingQuestion() {
+            questionText.textContent = currentQuestion.char;
+            questionPrompt.textContent = 'Scrivi la romanizzazione di questo carattere:';
+            answerOptions.classList.add('hidden');
+            writingInput.classList.remove('hidden');
+            compositionInterface.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            checkBtn.classList.remove('hidden');
+            composeBtn.classList.add('hidden');
+            writingAnswer.value = '';
+            writingAnswer.focus();
+        }
+
+        function setupCompositionQuestion() {
+            questionPrompt.textContent = 'Componi una sillaba con questi elementi:';
+            answerOptions.classList.add('hidden');
+            writingInput.classList.add('hidden');
+            compositionInterface.classList.remove('hidden');
+            nextBtn.classList.add('hidden');
+            checkBtn.classList.add('hidden');
+            composeBtn.classList.remove('hidden');
+            
+            // Select random consonant and vowel for the question
+            const consonantKeys = Object.keys(consonants);
+            const vowelKeys = Object.keys(vowels);
+            const randomConsonant = consonantKeys[Math.floor(Math.random() * consonantKeys.length)];
+            const randomVowel = vowelKeys[Math.floor(Math.random() * vowelKeys.length)];
+            
+            currentQuestion = {
+                consonant: randomConsonant,
+                vowel: randomVowel
+            };
+            
+            questionText.innerHTML = `${randomConsonant} + ${randomVowel}`;
+            consonantSelect.value = '';
+            vowelSelect.value = '';
+            compositionResult.textContent = '?';
+        }
+
+        function setupDecompositionQuestion() {
+            if (practiceScript !== 'syllables') {
+                setupRecognitionQuestion();
+                return;
+            }
+            
+            questionText.textContent = currentQuestion.char;
+            questionPrompt.textContent = 'Scomponi questa sillaba nei suoi elementi:';
+            answerOptions.classList.remove('hidden');
+            writingInput.classList.add('hidden');
+            compositionInterface.classList.add('hidden');
+            nextBtn.classList.remove('hidden');
+            checkBtn.classList.add('hidden');
+            composeBtn.classList.add('hidden');
+
+            const correctAnswer = `${currentQuestion.data.consonant} + ${currentQuestion.data.vowel}`;
+            const allConsonants = Object.keys(consonants);
+            const allVowels = Object.keys(vowels);
+            
+            const options = [correctAnswer];
+            while (options.length < 4) {
+                const randomConsonant = allConsonants[Math.floor(Math.random() * allConsonants.length)];
+                const randomVowel = allVowels[Math.floor(Math.random() * allVowels.length)];
+                const randomOption = `${randomConsonant} + ${randomVowel}`;
+                if (!options.includes(randomOption)) {
+                    options.push(randomOption);
+                }
+            }
+            
+            options.sort(() => Math.random() - 0.5);
+            
+            answerOptions.innerHTML = '';
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium korean-font';
+                button.textContent = option;
+                button.addEventListener('click', () => checkRecognitionAnswer(option, correctAnswer));
+                answerOptions.appendChild(button);
+            });
+        }
+
+        function checkRecognitionAnswer(selected, correct) {
+            total++;
+            const isCorrect = selected === correct;
+            
+            if (isCorrect) {
+                score++;
+                showFeedback('맞아요! 🎉 (Corretto!)', 'bg-green-100 text-green-800');
+            } else {
+                showFeedback(`틀렸어요. La risposta corretta è: ${correct}`, 'bg-red-100 text-red-800');
+            }
+            
+            updateScore();
+            
+            const buttons = answerOptions.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === correct) {
+                    btn.className = btn.className.replace('bg-gray-100', 'bg-green-200');
+                } else if (btn.textContent === selected && !isCorrect) {
+                    btn.className = btn.className.replace('bg-gray-100', 'bg-red-200');
+                }
+            });
+        }
+
+        function checkWritingAnswer() {
+            const userAnswer = writingAnswer.value.toLowerCase().trim();
+            total++;
+            
+            let correctAnswer;
+            if (practiceScript === 'syllables') {
+                correctAnswer = currentQuestion.data.romanization.toLowerCase();
+            } else {
+                correctAnswer = currentQuestion.data.toLowerCase();
+            }
+            
+            if (userAnswer === correctAnswer) {
+                score++;
+                showFeedback('맞아요! 🎉 (Corretto!)', 'bg-green-100 text-green-800');
+            } else {
+                showFeedback(`틀렸어요. La risposta corretta è: ${correctAnswer}`, 'bg-red-100 text-red-800');
+            }
+            
+            updateScore();
+            nextBtn.classList.remove('hidden');
+            checkBtn.classList.add('hidden');
+        }
+
+        function checkComposition() {
+            const selectedConsonant = consonantSelect.value;
+            const selectedVowel = vowelSelect.value;
+            total++;
+            
+            if (selectedConsonant === currentQuestion.consonant && selectedVowel === currentQuestion.vowel) {
+                score++;
+                showFeedback('맞아요! 🎉 (Corretto!)', 'bg-green-100 text-green-800');
+            } else {
+                showFeedback(`틀렸어요. La risposta corretta è: ${currentQuestion.consonant} + ${currentQuestion.vowel}`, 'bg-red-100 text-red-800');
+            }
+            
+            updateScore();
+            nextBtn.classList.remove('hidden');
+            composeBtn.classList.add('hidden');
+        }
+
+        function showFeedback(message, className) {
+            feedbackText.textContent = message;
+            feedback.className = `mb-6 p-4 rounded-lg ${className}`;
+            feedback.classList.remove('hidden');
+        }
+
+        function updateScore() {
+            scoreSpan.textContent = score;
+            totalSpan.textContent = total;
+        }
+
+        function updateExerciseInfo() {
+            let count;
+            let scriptName;
+            
+            if (practiceScript === 'consonants') {
+                count = Object.keys(consonants).length;
+                scriptName = 'Consonanti';
+            } else if (practiceScript === 'vowels') {
+                count = Object.keys(vowels).length;
+                scriptName = 'Vocali';
+            } else if (practiceScript === 'syllables') {
+                count = Object.keys(syllables).length;
+                scriptName = 'Sillabe';
+            }
+            
+            exerciseInfo.textContent = `${scriptName}: ${count} caratteri disponibili`;
+        }
+
+        // Initialize
+        renderCharacterGrid();
+        updateExerciseInfo();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970b1cc7f48ebab2',t:'MTc1NTQ1NDA2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
