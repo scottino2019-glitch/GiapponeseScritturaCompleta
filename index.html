@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impara Giapponese</title>
+    <title>Impara Giapponese - Hiragana, Katakana, Kanji</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
@@ -30,17 +30,17 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-pink-800 mb-2">日本語を学ぼう</h1>
+            <h1 class="text-4xl font-bold text-purple-800 mb-2">日本語を学ぼう</h1>
             <p class="text-lg text-gray-700">Impara il Giapponese</p>
         </header>
 
         <!-- Navigation -->
         <nav class="flex justify-center mb-8">
             <div class="bg-white rounded-full p-2 shadow-lg">
-                <button id="studyBtn" class="px-6 py-3 rounded-full bg-pink-600 text-white font-medium transition-all">
+                <button id="studyBtn" class="px-6 py-3 rounded-full bg-purple-600 text-white font-medium transition-all">
                     📚 Studio
                 </button>
-                <button id="practiceBtn" class="px-6 py-3 rounded-full text-pink-600 font-medium transition-all hover:bg-pink-50">
+                <button id="practiceBtn" class="px-6 py-3 rounded-full text-purple-600 font-medium transition-all hover:bg-purple-50">
                     🎯 Esercizi
                 </button>
             </div>
@@ -51,14 +51,14 @@
             <!-- Script Type Selector -->
             <div class="flex justify-center mb-6">
                 <div class="bg-white rounded-lg p-2 shadow-md flex flex-wrap gap-1">
-                    <button id="hiraganaBtn" class="px-4 py-2 rounded-md bg-pink-500 text-white font-medium text-sm">
+                    <button id="hiraganaBtn" class="px-4 py-2 rounded-md bg-purple-500 text-white font-medium text-sm">
                         ひらがな Hiragana
                     </button>
-                    <button id="katakanaBtn" class="px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
+                    <button id="katakanaBtn" class="px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
                         カタカナ Katakana
                     </button>
-                    <button id="kanjiBtn" class="px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
-                        漢字 Kanji
+                    <button id="kanjiBtn" class="px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
+                        漢字 Kanji Base
                     </button>
                 </div>
             </div>
@@ -66,10 +66,10 @@
             <!-- Display Mode Selector -->
             <div class="flex justify-center mb-6">
                 <div class="bg-white rounded-lg p-2 shadow-md">
-                    <button id="simpleBtn" class="px-4 py-2 rounded-md bg-purple-500 text-white font-medium">
+                    <button id="simpleBtn" class="px-4 py-2 rounded-md bg-pink-500 text-white font-medium">
                         Semplice
                     </button>
-                    <button id="detailedBtn" class="px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50">
+                    <button id="detailedBtn" class="px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50">
                         Dettagliato
                     </button>
                 </div>
@@ -77,12 +77,12 @@
 
             <!-- Info -->
             <div class="text-center mb-6">
-                <p id="scriptInfo" class="text-lg text-gray-600">ひらがな - Sillabario giapponese base</p>
+                <p id="scriptInfo" class="text-lg text-gray-600">ひらがな - Alfabeto sillabico giapponese</p>
                 <p id="displayInfo" class="text-sm text-gray-500 mt-2">Visualizzazione semplice</p>
             </div>
 
             <!-- Character Grid -->
-            <div id="characterGrid" class="grid grid-cols-5 md:grid-cols-10 gap-4 max-w-6xl mx-auto">
+            <div id="characterGrid" class="grid grid-cols-5 md:grid-cols-10 gap-3 max-w-6xl mx-auto">
                 <!-- Characters will be populated by JavaScript -->
             </div>
         </div>
@@ -93,17 +93,17 @@
                 <!-- Practice Mode Selector -->
                 <div class="flex justify-center mb-6">
                     <div class="bg-white rounded-lg p-2 shadow-md flex flex-wrap gap-1">
-                        <button id="recognitionBtn" class="px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm">
+                        <button id="recognitionBtn" class="px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm">
                             🔍 Riconoscimento
                         </button>
-                        <button id="writingBtn" class="px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
+                        <button id="writingBtn" class="px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
                             ✍️ Scrittura
                         </button>
-                        <button id="meaningBtn" class="px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
-                            📝 Significati
-                        </button>
-                        <button id="conversionBtn" class="px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
+                        <button id="conversionBtn" class="px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
                             🔄 Conversione
+                        </button>
+                        <button id="kanjiReadingBtn" class="px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
+                            📖 Kanji
                         </button>
                     </div>
                 </div>
@@ -111,13 +111,13 @@
                 <!-- Script Selector for Practice -->
                 <div class="flex justify-center mb-6">
                     <div class="bg-white rounded-lg p-2 shadow-md flex flex-wrap gap-1">
-                        <button id="practiceHiraganaBtn" class="px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm">
+                        <button id="practiceHiraganaBtn" class="px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm">
                             ひらがな
                         </button>
-                        <button id="practiceKatakanaBtn" class="px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
+                        <button id="practiceKatakanaBtn" class="px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
                             カタカナ
                         </button>
-                        <button id="practiceKanjiBtn" class="px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm">
+                        <button id="practiceKanjiBtn" class="px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm">
                             漢字
                         </button>
                     </div>
@@ -137,7 +137,7 @@
 
                     <!-- Writing Input -->
                     <div id="writingInput" class="hidden mb-6">
-                        <input type="text" id="writingAnswer" class="w-full p-4 text-center text-2xl border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Scrivi la romanizzazione...">
+                        <input type="text" id="writingAnswer" class="w-full p-4 text-center text-2xl border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none" placeholder="Scrivi il romaji...">
                     </div>
 
                     <!-- Feedback -->
@@ -147,7 +147,7 @@
 
                     <!-- Controls -->
                     <div class="flex justify-center space-x-4">
-                        <button id="nextBtn" class="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                        <button id="nextBtn" class="px-6 py-3 bg-pink-500 text-white rounded-lg font-medium hover:bg-pink-600 transition-colors">
                             Prossimo →
                         </button>
                         <button id="checkBtn" class="hidden px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors">
@@ -161,7 +161,7 @@
                             Punteggio: <span id="score">0</span>/<span id="total">0</span>
                         </div>
                         <div class="text-xs text-gray-500">
-                            <span id="exerciseInfo">Hiragana: 46 caratteri disponibili</span>
+                            <span id="exerciseInfo">Hiragana: 71 caratteri disponibili</span>
                         </div>
                     </div>
                 </div>
@@ -170,78 +170,206 @@
     </div>
 
     <script>
-        // Japanese character data
+        // Complete Japanese character data
         const hiragana = {
-            'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o',
-            'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko',
-            'が': 'ga', 'ぎ': 'gi', 'ぐ': 'gu', 'げ': 'ge', 'ご': 'go',
-            'さ': 'sa', 'し': 'shi', 'す': 'su', 'せ': 'se', 'そ': 'so',
-            'ざ': 'za', 'じ': 'ji', 'ず': 'zu', 'ぜ': 'ze', 'ぞ': 'zo',
-            'た': 'ta', 'ち': 'chi', 'つ': 'tsu', 'て': 'te', 'と': 'to',
-            'だ': 'da', 'ぢ': 'ji', 'づ': 'zu', 'で': 'de', 'ど': 'do',
-            'な': 'na', 'に': 'ni', 'ぬ': 'nu', 'ね': 'ne', 'の': 'no',
-            'は': 'ha', 'ひ': 'hi', 'ふ': 'fu', 'へ': 'he', 'ほ': 'ho',
-            'ば': 'ba', 'び': 'bi', 'ぶ': 'bu', 'べ': 'be', 'ぼ': 'bo',
-            'ぱ': 'pa', 'ぴ': 'pi', 'ぷ': 'pu', 'ぺ': 'pe', 'ぽ': 'po',
-            'ま': 'ma', 'み': 'mi', 'む': 'mu', 'め': 'me', 'も': 'mo',
-            'や': 'ya', 'ゆ': 'yu', 'よ': 'yo',
-            'ら': 'ra', 'り': 'ri', 'る': 'ru', 'れ': 're', 'ろ': 'ro',
-            'わ': 'wa', 'を': 'wo', 'ん': 'n'
+            // Basic hiragana (46 characters)
+            'あ': { romaji: 'a', type: 'basic' },
+            'い': { romaji: 'i', type: 'basic' },
+            'う': { romaji: 'u', type: 'basic' },
+            'え': { romaji: 'e', type: 'basic' },
+            'お': { romaji: 'o', type: 'basic' },
+            'か': { romaji: 'ka', type: 'basic' },
+            'き': { romaji: 'ki', type: 'basic' },
+            'く': { romaji: 'ku', type: 'basic' },
+            'け': { romaji: 'ke', type: 'basic' },
+            'こ': { romaji: 'ko', type: 'basic' },
+            'さ': { romaji: 'sa', type: 'basic' },
+            'し': { romaji: 'shi', type: 'basic' },
+            'す': { romaji: 'su', type: 'basic' },
+            'せ': { romaji: 'se', type: 'basic' },
+            'そ': { romaji: 'so', type: 'basic' },
+            'た': { romaji: 'ta', type: 'basic' },
+            'ち': { romaji: 'chi', type: 'basic' },
+            'つ': { romaji: 'tsu', type: 'basic' },
+            'て': { romaji: 'te', type: 'basic' },
+            'と': { romaji: 'to', type: 'basic' },
+            'な': { romaji: 'na', type: 'basic' },
+            'に': { romaji: 'ni', type: 'basic' },
+            'ぬ': { romaji: 'nu', type: 'basic' },
+            'ね': { romaji: 'ne', type: 'basic' },
+            'の': { romaji: 'no', type: 'basic' },
+            'は': { romaji: 'ha', type: 'basic' },
+            'ひ': { romaji: 'hi', type: 'basic' },
+            'ふ': { romaji: 'fu', type: 'basic' },
+            'へ': { romaji: 'he', type: 'basic' },
+            'ほ': { romaji: 'ho', type: 'basic' },
+            'ま': { romaji: 'ma', type: 'basic' },
+            'み': { romaji: 'mi', type: 'basic' },
+            'む': { romaji: 'mu', type: 'basic' },
+            'め': { romaji: 'me', type: 'basic' },
+            'も': { romaji: 'mo', type: 'basic' },
+            'や': { romaji: 'ya', type: 'basic' },
+            'ゆ': { romaji: 'yu', type: 'basic' },
+            'よ': { romaji: 'yo', type: 'basic' },
+            'ら': { romaji: 'ra', type: 'basic' },
+            'り': { romaji: 'ri', type: 'basic' },
+            'る': { romaji: 'ru', type: 'basic' },
+            'れ': { romaji: 're', type: 'basic' },
+            'ろ': { romaji: 'ro', type: 'basic' },
+            'わ': { romaji: 'wa', type: 'basic' },
+            'を': { romaji: 'wo', type: 'basic' },
+            'ん': { romaji: 'n', type: 'basic' },
+            
+            // Dakuten (voiced sounds)
+            'が': { romaji: 'ga', type: 'dakuten' },
+            'ぎ': { romaji: 'gi', type: 'dakuten' },
+            'ぐ': { romaji: 'gu', type: 'dakuten' },
+            'げ': { romaji: 'ge', type: 'dakuten' },
+            'ご': { romaji: 'go', type: 'dakuten' },
+            'ざ': { romaji: 'za', type: 'dakuten' },
+            'じ': { romaji: 'ji', type: 'dakuten' },
+            'ず': { romaji: 'zu', type: 'dakuten' },
+            'ぜ': { romaji: 'ze', type: 'dakuten' },
+            'ぞ': { romaji: 'zo', type: 'dakuten' },
+            'だ': { romaji: 'da', type: 'dakuten' },
+            'ぢ': { romaji: 'ji', type: 'dakuten' },
+            'づ': { romaji: 'zu', type: 'dakuten' },
+            'で': { romaji: 'de', type: 'dakuten' },
+            'ど': { romaji: 'do', type: 'dakuten' },
+            'ば': { romaji: 'ba', type: 'dakuten' },
+            'び': { romaji: 'bi', type: 'dakuten' },
+            'ぶ': { romaji: 'bu', type: 'dakuten' },
+            'べ': { romaji: 'be', type: 'dakuten' },
+            'ぼ': { romaji: 'bo', type: 'dakuten' },
+            
+            // Handakuten (p sounds)
+            'ぱ': { romaji: 'pa', type: 'handakuten' },
+            'ぴ': { romaji: 'pi', type: 'handakuten' },
+            'ぷ': { romaji: 'pu', type: 'handakuten' },
+            'ぺ': { romaji: 'pe', type: 'handakuten' },
+            'ぽ': { romaji: 'po', type: 'handakuten' },
+            
+            // Combination sounds (yōon)
+            'きゃ': { romaji: 'kya', type: 'combination' },
+            'きゅ': { romaji: 'kyu', type: 'combination' },
+            'きょ': { romaji: 'kyo', type: 'combination' }
         };
 
         const katakana = {
-            'ア': 'a', 'イ': 'i', 'ウ': 'u', 'エ': 'e', 'オ': 'o',
-            'カ': 'ka', 'キ': 'ki', 'ク': 'ku', 'ケ': 'ke', 'コ': 'ko',
-            'ガ': 'ga', 'ギ': 'gi', 'グ': 'gu', 'ゲ': 'ge', 'ゴ': 'go',
-            'サ': 'sa', 'シ': 'shi', 'ス': 'su', 'セ': 'se', 'ソ': 'so',
-            'ザ': 'za', 'ジ': 'ji', 'ズ': 'zu', 'ゼ': 'ze', 'ゾ': 'zo',
-            'タ': 'ta', 'チ': 'chi', 'ツ': 'tsu', 'テ': 'te', 'ト': 'to',
-            'ダ': 'da', 'ヂ': 'ji', 'ヅ': 'zu', 'デ': 'de', 'ド': 'do',
-            'ナ': 'na', 'ニ': 'ni', 'ヌ': 'nu', 'ネ': 'ne', 'ノ': 'no',
-            'ハ': 'ha', 'ヒ': 'hi', 'フ': 'fu', 'ヘ': 'he', 'ホ': 'ho',
-            'バ': 'ba', 'ビ': 'bi', 'ブ': 'bu', 'ベ': 'be', 'ボ': 'bo',
-            'パ': 'pa', 'ピ': 'pi', 'プ': 'pu', 'ペ': 'pe', 'ポ': 'po',
-            'マ': 'ma', 'ミ': 'mi', 'ム': 'mu', 'メ': 'me', 'モ': 'mo',
-            'ヤ': 'ya', 'ユ': 'yu', 'ヨ': 'yo',
-            'ラ': 'ra', 'リ': 'ri', 'ル': 'ru', 'レ': 're', 'ロ': 'ro',
-            'ワ': 'wa', 'ヲ': 'wo', 'ン': 'n'
+            // Basic katakana (46 characters)
+            'ア': { romaji: 'a', type: 'basic' },
+            'イ': { romaji: 'i', type: 'basic' },
+            'ウ': { romaji: 'u', type: 'basic' },
+            'エ': { romaji: 'e', type: 'basic' },
+            'オ': { romaji: 'o', type: 'basic' },
+            'カ': { romaji: 'ka', type: 'basic' },
+            'キ': { romaji: 'ki', type: 'basic' },
+            'ク': { romaji: 'ku', type: 'basic' },
+            'ケ': { romaji: 'ke', type: 'basic' },
+            'コ': { romaji: 'ko', type: 'basic' },
+            'サ': { romaji: 'sa', type: 'basic' },
+            'シ': { romaji: 'shi', type: 'basic' },
+            'ス': { romaji: 'su', type: 'basic' },
+            'セ': { romaji: 'se', type: 'basic' },
+            'ソ': { romaji: 'so', type: 'basic' },
+            'タ': { romaji: 'ta', type: 'basic' },
+            'チ': { romaji: 'chi', type: 'basic' },
+            'ツ': { romaji: 'tsu', type: 'basic' },
+            'テ': { romaji: 'te', type: 'basic' },
+            'ト': { romaji: 'to', type: 'basic' },
+            'ナ': { romaji: 'na', type: 'basic' },
+            'ニ': { romaji: 'ni', type: 'basic' },
+            'ヌ': { romaji: 'nu', type: 'basic' },
+            'ネ': { romaji: 'ne', type: 'basic' },
+            'ノ': { romaji: 'no', type: 'basic' },
+            'ハ': { romaji: 'ha', type: 'basic' },
+            'ヒ': { romaji: 'hi', type: 'basic' },
+            'フ': { romaji: 'fu', type: 'basic' },
+            'ヘ': { romaji: 'he', type: 'basic' },
+            'ホ': { romaji: 'ho', type: 'basic' },
+            'マ': { romaji: 'ma', type: 'basic' },
+            'ミ': { romaji: 'mi', type: 'basic' },
+            'ム': { romaji: 'mu', type: 'basic' },
+            'メ': { romaji: 'me', type: 'basic' },
+            'モ': { romaji: 'mo', type: 'basic' },
+            'ヤ': { romaji: 'ya', type: 'basic' },
+            'ユ': { romaji: 'yu', type: 'basic' },
+            'ヨ': { romaji: 'yo', type: 'basic' },
+            'ラ': { romaji: 'ra', type: 'basic' },
+            'リ': { romaji: 'ri', type: 'basic' },
+            'ル': { romaji: 'ru', type: 'basic' },
+            'レ': { romaji: 're', type: 'basic' },
+            'ロ': { romaji: 'ro', type: 'basic' },
+            'ワ': { romaji: 'wa', type: 'basic' },
+            'ヲ': { romaji: 'wo', type: 'basic' },
+            'ン': { romaji: 'n', type: 'basic' },
+            
+            // Dakuten (voiced sounds)
+            'ガ': { romaji: 'ga', type: 'dakuten' },
+            'ギ': { romaji: 'gi', type: 'dakuten' },
+            'グ': { romaji: 'gu', type: 'dakuten' },
+            'ゲ': { romaji: 'ge', type: 'dakuten' },
+            'ゴ': { romaji: 'go', type: 'dakuten' },
+            'ザ': { romaji: 'za', type: 'dakuten' },
+            'ジ': { romaji: 'ji', type: 'dakuten' },
+            'ズ': { romaji: 'zu', type: 'dakuten' },
+            'ゼ': { romaji: 'ze', type: 'dakuten' },
+            'ゾ': { romaji: 'zo', type: 'dakuten' },
+            'ダ': { romaji: 'da', type: 'dakuten' },
+            'ヂ': { romaji: 'ji', type: 'dakuten' },
+            'ヅ': { romaji: 'zu', type: 'dakuten' },
+            'デ': { romaji: 'de', type: 'dakuten' },
+            'ド': { romaji: 'do', type: 'dakuten' },
+            'バ': { romaji: 'ba', type: 'dakuten' },
+            'ビ': { romaji: 'bi', type: 'dakuten' },
+            'ブ': { romaji: 'bu', type: 'dakuten' },
+            'ベ': { romaji: 'be', type: 'dakuten' },
+            'ボ': { romaji: 'bo', type: 'dakuten' },
+            
+            // Handakuten (p sounds)
+            'パ': { romaji: 'pa', type: 'handakuten' },
+            'ピ': { romaji: 'pi', type: 'handakuten' },
+            'プ': { romaji: 'pu', type: 'handakuten' },
+            'ペ': { romaji: 'pe', type: 'handakuten' },
+            'ポ': { romaji: 'po', type: 'handakuten' },
+            
+            // Combination sounds (yōon)
+            'キャ': { romaji: 'kya', type: 'combination' },
+            'キュ': { romaji: 'kyu', type: 'combination' },
+            'キョ': { romaji: 'kyo', type: 'combination' }
         };
 
         const kanji = {
-            '一': { reading: 'ichi', meaning: 'uno' },
-            '二': { reading: 'ni', meaning: 'due' },
-            '三': { reading: 'san', meaning: 'tre' },
-            '四': { reading: 'shi/yon', meaning: 'quattro' },
-            '五': { reading: 'go', meaning: 'cinque' },
-            '六': { reading: 'roku', meaning: 'sei' },
-            '七': { reading: 'shichi/nana', meaning: 'sette' },
-            '八': { reading: 'hachi', meaning: 'otto' },
-            '九': { reading: 'kyuu/ku', meaning: 'nove' },
-            '十': { reading: 'juu', meaning: 'dieci' },
-            '人': { reading: 'hito/jin', meaning: 'persona' },
-            '日': { reading: 'hi/nichi', meaning: 'giorno/sole' },
-            '月': { reading: 'tsuki/getsu', meaning: 'luna/mese' },
-            '火': { reading: 'hi/ka', meaning: 'fuoco' },
-            '水': { reading: 'mizu/sui', meaning: 'acqua' },
-            '木': { reading: 'ki/moku', meaning: 'albero/legno' },
-            '金': { reading: 'kane/kin', meaning: 'oro/denaro' },
-            '土': { reading: 'tsuchi/do', meaning: 'terra' },
-            '大': { reading: 'ookii/dai', meaning: 'grande' },
-            '小': { reading: 'chiisai/shou', meaning: 'piccolo' }
-        };
-
-        // Conversion pairs
-        const hiraganaToKatakana = {
-            'あ': 'ア', 'い': 'イ', 'う': 'ウ', 'え': 'エ', 'お': 'オ',
-            'か': 'カ', 'き': 'キ', 'く': 'ク', 'け': 'ケ', 'こ': 'コ',
-            'さ': 'サ', 'し': 'シ', 'す': 'ス', 'せ': 'セ', 'そ': 'ソ',
-            'た': 'タ', 'ち': 'チ', 'つ': 'ツ', 'て': 'テ', 'と': 'ト',
-            'な': 'ナ', 'に': 'ニ', 'ぬ': 'ヌ', 'ね': 'ネ', 'の': 'ノ',
-            'は': 'ハ', 'ひ': 'ヒ', 'ふ': 'フ', 'へ': 'ヘ', 'ほ': 'ホ',
-            'ま': 'マ', 'み': 'ミ', 'む': 'ム', 'め': 'メ', 'も': 'モ',
-            'や': 'ヤ', 'ゆ': 'ユ', 'よ': 'ヨ',
-            'ら': 'ラ', 'り': 'リ', 'る': 'ル', 'れ': 'レ', 'ろ': 'ロ',
-            'わ': 'ワ', 'を': 'ヲ', 'ん': 'ン'
+            '人': { kunyomi: 'ひと', onyomi: 'ジン', meaning: 'persona', category: 'basic' },
+            '大': { kunyomi: 'おお', onyomi: 'ダイ', meaning: 'grande', category: 'basic' },
+            '小': { kunyomi: 'ちい', onyomi: 'ショウ', meaning: 'piccolo', category: 'basic' },
+            '日': { kunyomi: 'ひ', onyomi: 'ニチ', meaning: 'sole/giorno', category: 'basic' },
+            '月': { kunyomi: 'つき', onyomi: 'ゲツ', meaning: 'luna/mese', category: 'basic' },
+            '火': { kunyomi: 'ひ', onyomi: 'カ', meaning: 'fuoco', category: 'basic' },
+            '水': { kunyomi: 'みず', onyomi: 'スイ', meaning: 'acqua', category: 'basic' },
+            '木': { kunyomi: 'き', onyomi: 'モク', meaning: 'albero', category: 'basic' },
+            '金': { kunyomi: 'きん', onyomi: 'キン', meaning: 'oro/denaro', category: 'basic' },
+            '土': { kunyomi: 'つち', onyomi: 'ド', meaning: 'terra', category: 'basic' },
+            '山': { kunyomi: 'やま', onyomi: 'サン', meaning: 'montagna', category: 'basic' },
+            '川': { kunyomi: 'かわ', onyomi: 'セン', meaning: 'fiume', category: 'basic' },
+            '田': { kunyomi: 'た', onyomi: 'デン', meaning: 'risaia', category: 'basic' },
+            '中': { kunyomi: 'なか', onyomi: 'チュウ', meaning: 'dentro/centro', category: 'basic' },
+            '上': { kunyomi: 'うえ', onyomi: 'ジョウ', meaning: 'sopra', category: 'basic' },
+            '下': { kunyomi: 'した', onyomi: 'カ', meaning: 'sotto', category: 'basic' },
+            '左': { kunyomi: 'ひだり', onyomi: 'サ', meaning: 'sinistra', category: 'basic' },
+            '右': { kunyomi: 'みぎ', onyomi: 'ウ', meaning: 'destra', category: 'basic' },
+            '手': { kunyomi: 'て', onyomi: 'シュ', meaning: 'mano', category: 'basic' },
+            '足': { kunyomi: 'あし', onyomi: 'ソク', meaning: 'piede/gamba', category: 'basic' },
+            '目': { kunyomi: 'め', onyomi: 'モク', meaning: 'occhio', category: 'basic' },
+            '口': { kunyomi: 'くち', onyomi: 'コウ', meaning: 'bocca', category: 'basic' },
+            '耳': { kunyomi: 'みみ', onyomi: 'ジ', meaning: 'orecchio', category: 'basic' },
+            '心': { kunyomi: 'こころ', onyomi: 'シン', meaning: 'cuore', category: 'basic' },
+            '本': { kunyomi: 'もと', onyomi: 'ホン', meaning: 'libro/origine', category: 'basic' },
+            '学': { kunyomi: 'まな', onyomi: 'ガク', meaning: 'studiare', category: 'basic' },
+            '生': { kunyomi: 'い', onyomi: 'セイ', meaning: 'vita/nascere', category: 'basic' },
+            '年': { kunyomi: 'とし', onyomi: 'ネン', meaning: 'anno', category: 'basic' },
+            '国': { kunyomi: 'くに', onyomi: 'コク', meaning: 'paese', category: 'basic' },
+            '家': { kunyomi: 'いえ', onyomi: 'カ', meaning: 'casa', category: 'basic' }
         };
 
         // State
@@ -269,8 +397,8 @@
         const characterGrid = document.getElementById('characterGrid');
         const recognitionBtn = document.getElementById('recognitionBtn');
         const writingBtn = document.getElementById('writingBtn');
-        const meaningBtn = document.getElementById('meaningBtn');
         const conversionBtn = document.getElementById('conversionBtn');
+        const kanjiReadingBtn = document.getElementById('kanjiReadingBtn');
         const practiceHiraganaBtn = document.getElementById('practiceHiraganaBtn');
         const practiceKatakanaBtn = document.getElementById('practiceKatakanaBtn');
         const practiceKanjiBtn = document.getElementById('practiceKanjiBtn');
@@ -298,8 +426,8 @@
         detailedBtn.addEventListener('click', () => switchDisplayMode('detailed'));
         recognitionBtn.addEventListener('click', () => switchPracticeMode('recognition'));
         writingBtn.addEventListener('click', () => switchPracticeMode('writing'));
-        meaningBtn.addEventListener('click', () => switchPracticeMode('meaning'));
         conversionBtn.addEventListener('click', () => switchPracticeMode('conversion'));
+        kanjiReadingBtn.addEventListener('click', () => switchPracticeMode('kanjiReading'));
         practiceHiraganaBtn.addEventListener('click', () => switchPracticeScript('hiragana'));
         practiceKatakanaBtn.addEventListener('click', () => switchPracticeScript('katakana'));
         practiceKanjiBtn.addEventListener('click', () => switchPracticeScript('kanji'));
@@ -313,14 +441,14 @@
         function switchMode(mode) {
             currentMode = mode;
             if (mode === 'study') {
-                studyBtn.className = 'px-6 py-3 rounded-full bg-pink-600 text-white font-medium transition-all';
-                practiceBtn.className = 'px-6 py-3 rounded-full text-pink-600 font-medium transition-all hover:bg-pink-50';
+                studyBtn.className = 'px-6 py-3 rounded-full bg-purple-600 text-white font-medium transition-all';
+                practiceBtn.className = 'px-6 py-3 rounded-full text-purple-600 font-medium transition-all hover:bg-purple-50';
                 studySection.classList.remove('hidden');
                 practiceSection.classList.add('hidden');
                 renderCharacterGrid();
             } else {
-                practiceBtn.className = 'px-6 py-3 rounded-full bg-pink-600 text-white font-medium transition-all';
-                studyBtn.className = 'px-6 py-3 rounded-full text-pink-600 font-medium transition-all hover:bg-pink-50';
+                practiceBtn.className = 'px-6 py-3 rounded-full bg-purple-600 text-white font-medium transition-all';
+                studyBtn.className = 'px-6 py-3 rounded-full text-purple-600 font-medium transition-all hover:bg-purple-50';
                 studySection.classList.add('hidden');
                 practiceSection.classList.remove('hidden');
                 startPractice();
@@ -330,19 +458,19 @@
         function switchScript(script) {
             currentScript = script;
             // Reset buttons
-            hiraganaBtn.className = 'px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
-            katakanaBtn.className = 'px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
-            kanjiBtn.className = 'px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
+            hiraganaBtn.className = 'px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
+            katakanaBtn.className = 'px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
+            kanjiBtn.className = 'px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
             
             if (script === 'hiragana') {
-                hiraganaBtn.className = 'px-4 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
-                scriptInfo.textContent = 'ひらがな - Sillabario giapponese base';
+                hiraganaBtn.className = 'px-4 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
+                scriptInfo.textContent = 'ひらがな - Alfabeto sillabico giapponese';
             } else if (script === 'katakana') {
-                katakanaBtn.className = 'px-4 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
-                scriptInfo.textContent = 'カタカナ - Per parole straniere e onomatopee';
+                katakanaBtn.className = 'px-4 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
+                scriptInfo.textContent = 'カタカナ - Alfabeto per parole straniere';
             } else if (script === 'kanji') {
-                kanjiBtn.className = 'px-4 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
-                scriptInfo.textContent = '漢字 - Caratteri cinesi con significato';
+                kanjiBtn.className = 'px-4 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
+                scriptInfo.textContent = '漢字 - Caratteri cinesi usati in giapponese';
             }
             renderCharacterGrid();
         }
@@ -350,12 +478,12 @@
         function switchDisplayMode(mode) {
             displayMode = mode;
             if (mode === 'simple') {
-                simpleBtn.className = 'px-4 py-2 rounded-md bg-purple-500 text-white font-medium';
-                detailedBtn.className = 'px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50';
+                simpleBtn.className = 'px-4 py-2 rounded-md bg-pink-500 text-white font-medium';
+                detailedBtn.className = 'px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50';
                 displayInfo.textContent = 'Visualizzazione semplice';
             } else {
-                detailedBtn.className = 'px-4 py-2 rounded-md bg-purple-500 text-white font-medium';
-                simpleBtn.className = 'px-4 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50';
+                detailedBtn.className = 'px-4 py-2 rounded-md bg-pink-500 text-white font-medium';
+                simpleBtn.className = 'px-4 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50';
                 displayInfo.textContent = 'Visualizzazione dettagliata con informazioni extra';
             }
             renderCharacterGrid();
@@ -364,19 +492,19 @@
         function switchPracticeMode(mode) {
             practiceMode = mode;
             // Reset buttons
-            recognitionBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
-            writingBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
-            meaningBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
-            conversionBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
+            recognitionBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
+            writingBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
+            conversionBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
+            kanjiReadingBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
             
             if (mode === 'recognition') {
-                recognitionBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
+                recognitionBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
             } else if (mode === 'writing') {
-                writingBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
-            } else if (mode === 'meaning') {
-                meaningBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
+                writingBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
             } else if (mode === 'conversion') {
-                conversionBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
+                conversionBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
+            } else if (mode === 'kanjiReading') {
+                kanjiReadingBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
             }
             startPractice();
         }
@@ -384,16 +512,16 @@
         function switchPracticeScript(script) {
             practiceScript = script;
             // Reset buttons
-            practiceHiraganaBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
-            practiceKatakanaBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
-            practiceKanjiBtn.className = 'px-3 py-2 rounded-md text-pink-500 font-medium hover:bg-pink-50 text-sm';
+            practiceHiraganaBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
+            practiceKatakanaBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
+            practiceKanjiBtn.className = 'px-3 py-2 rounded-md text-purple-500 font-medium hover:bg-purple-50 text-sm';
             
             if (script === 'hiragana') {
-                practiceHiraganaBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
+                practiceHiraganaBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
             } else if (script === 'katakana') {
-                practiceKatakanaBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
+                practiceKatakanaBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
             } else if (script === 'kanji') {
-                practiceKanjiBtn.className = 'px-3 py-2 rounded-md bg-pink-500 text-white font-medium text-sm';
+                practiceKanjiBtn.className = 'px-3 py-2 rounded-md bg-purple-500 text-white font-medium text-sm';
             }
             updateExerciseInfo();
             startPractice();
@@ -415,61 +543,65 @@
                 const card = document.createElement('div');
                 
                 if (displayMode === 'simple') {
-                    card.className = 'bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow cursor-pointer card-flip min-h-[130px] flex flex-col justify-center';
+                    card.className = 'bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow cursor-pointer card-flip min-h-[120px] flex flex-col justify-center';
                     
                     if (currentScript === 'kanji') {
                         card.innerHTML = `
                             <div class="card-front">
-                                <div class="text-6xl mb-3 japanese-font font-bold text-black">${char}</div>
-                                <div class="text-lg font-semibold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">${info.meaning}</div>
+                                <div class="text-5xl mb-2 japanese-font font-bold text-black">${char}</div>
+                                <div class="text-sm font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full">${info.kunyomi}</div>
                             </div>
-                            <div class="card-back bg-purple-50 rounded-lg p-6 flex flex-col justify-center">
-                                <div class="text-3xl mb-3 text-purple-700 font-bold">${info.reading}</div>
-                                <div class="text-5xl japanese-font font-bold text-purple-600">${char}</div>
+                            <div class="card-back bg-purple-50 rounded-lg p-4 flex flex-col justify-center">
+                                <div class="text-2xl mb-2 text-purple-700 font-bold">${info.kunyomi}</div>
+                                <div class="text-4xl japanese-font font-bold text-purple-600 mb-1">${char}</div>
+                                <div class="text-xs text-purple-600">${info.meaning}</div>
                             </div>
                         `;
                     } else {
                         card.innerHTML = `
                             <div class="card-front">
-                                <div class="text-6xl mb-3 japanese-font font-bold text-black">${char}</div>
-                                <div class="text-lg font-semibold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">${info}</div>
+                                <div class="text-5xl mb-2 japanese-font font-bold text-black">${char}</div>
+                                <div class="text-sm font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full">${info.romaji}</div>
                             </div>
-                            <div class="card-back bg-purple-50 rounded-lg p-6 flex flex-col justify-center">
-                                <div class="text-3xl mb-3 text-purple-700 font-bold">${info}</div>
-                                <div class="text-5xl japanese-font font-bold text-purple-600">${char}</div>
+                            <div class="card-back bg-purple-50 rounded-lg p-4 flex flex-col justify-center">
+                                <div class="text-2xl mb-2 text-purple-700 font-bold">${info.romaji}</div>
+                                <div class="text-4xl japanese-font font-bold text-purple-600">${char}</div>
                             </div>
                         `;
                     }
                 } else {
-                    card.className = 'bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow cursor-pointer card-flip min-h-[160px] flex flex-col justify-center';
+                    card.className = 'bg-white rounded-lg shadow-md p-3 text-center hover:shadow-lg transition-shadow cursor-pointer card-flip min-h-[140px] flex flex-col justify-center';
                     
                     if (currentScript === 'kanji') {
                         card.innerHTML = `
                             <div class="card-front">
-                                <div class="text-5xl mb-2 japanese-font font-bold text-black">${char}</div>
-                                <div class="text-sm font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full mb-2">${info.meaning}</div>
+                                <div class="text-4xl mb-1 japanese-font font-bold text-black">${char}</div>
+                                <div class="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full mb-1">${info.kunyomi}</div>
                                 <div class="text-xs text-gray-600">
-                                    <div>Lettura: ${info.reading}</div>
+                                    <div>On: ${info.onyomi}</div>
+                                    <div class="mt-1">${info.meaning}</div>
                                 </div>
                             </div>
-                            <div class="card-back bg-purple-50 rounded-lg p-4 flex flex-col justify-center">
-                                <div class="text-2xl mb-2 text-purple-700 font-bold">${info.meaning}</div>
-                                <div class="text-4xl japanese-font font-bold text-purple-600 mb-2">${char}</div>
-                                <div class="text-sm text-purple-600">${info.reading}</div>
+                            <div class="card-back bg-purple-50 rounded-lg p-3 flex flex-col justify-center">
+                                <div class="text-lg mb-1 text-purple-700 font-bold">${info.kunyomi}</div>
+                                <div class="text-3xl japanese-font font-bold text-purple-600 mb-1">${char}</div>
+                                <div class="text-xs text-purple-600">${info.meaning}</div>
+                                <div class="text-xs text-purple-500 mt-1">On: ${info.onyomi}</div>
                             </div>
                         `;
                     } else {
-                        const katakanaEquiv = currentScript === 'hiragana' ? hiraganaToKatakana[char] : '';
                         card.innerHTML = `
                             <div class="card-front">
-                                <div class="text-5xl mb-2 japanese-font font-bold text-black">${char}</div>
-                                <div class="text-sm font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full mb-2">${info}</div>
-                                ${katakanaEquiv ? `<div class="text-xs text-gray-600">Katakana: ${katakanaEquiv}</div>` : ''}
+                                <div class="text-4xl mb-1 japanese-font font-bold text-black">${char}</div>
+                                <div class="text-xs font-semibold text-gray-700 bg-gray-100 px-2 py-1 rounded-full mb-1">${info.romaji}</div>
+                                <div class="text-xs text-gray-600">
+                                    <div>Tipo: ${info.type}</div>
+                                </div>
                             </div>
-                            <div class="card-back bg-purple-50 rounded-lg p-4 flex flex-col justify-center">
-                                <div class="text-2xl mb-2 text-purple-700 font-bold">${info}</div>
-                                <div class="text-4xl japanese-font font-bold text-purple-600 mb-2">${char}</div>
-                                ${katakanaEquiv ? `<div class="text-sm text-purple-600">${katakanaEquiv}</div>` : ''}
+                            <div class="card-back bg-purple-50 rounded-lg p-3 flex flex-col justify-center">
+                                <div class="text-lg mb-1 text-purple-700 font-bold">${info.romaji}</div>
+                                <div class="text-3xl japanese-font font-bold text-purple-600 mb-1">${char}</div>
+                                <div class="text-xs text-purple-600">${info.type}</div>
                             </div>
                         `;
                     }
@@ -515,31 +647,38 @@
                 setupRecognitionQuestion();
             } else if (practiceMode === 'writing') {
                 setupWritingQuestion();
-            } else if (practiceMode === 'meaning') {
-                setupMeaningQuestion();
             } else if (practiceMode === 'conversion') {
                 setupConversionQuestion();
+            } else if (practiceMode === 'kanjiReading') {
+                setupKanjiReadingQuestion();
             }
         }
 
         function setupRecognitionQuestion() {
             questionText.textContent = currentQuestion.char;
-            questionPrompt.textContent = 'Come si pronuncia questo carattere?';
+            
+            if (practiceScript === 'kanji') {
+                questionPrompt.textContent = 'Come si legge questo kanji? (kun-yomi)';
+            } else {
+                questionPrompt.textContent = 'Come si pronuncia questo carattere?';
+            }
+            
             answerOptions.classList.remove('hidden');
             writingInput.classList.add('hidden');
             nextBtn.classList.remove('hidden');
             checkBtn.classList.add('hidden');
 
             let correctAnswer, allAnswers;
+            
             if (practiceScript === 'kanji') {
-                correctAnswer = currentQuestion.data.reading;
-                allAnswers = Object.values(kanji).map(k => k.reading);
+                correctAnswer = currentQuestion.data.kunyomi;
+                allAnswers = Object.values(kanji).map(k => k.kunyomi);
             } else {
-                correctAnswer = currentQuestion.data;
+                correctAnswer = currentQuestion.data.romaji;
                 if (practiceScript === 'hiragana') {
-                    allAnswers = Object.values(hiragana);
+                    allAnswers = Object.values(hiragana).map(h => h.romaji);
                 } else {
-                    allAnswers = Object.values(katakana);
+                    allAnswers = Object.values(katakana).map(k => k.romaji);
                 }
             }
 
@@ -565,7 +704,13 @@
 
         function setupWritingQuestion() {
             questionText.textContent = currentQuestion.char;
-            questionPrompt.textContent = 'Scrivi la romanizzazione di questo carattere:';
+            
+            if (practiceScript === 'kanji') {
+                questionPrompt.textContent = 'Scrivi la lettura kun-yomi di questo kanji:';
+            } else {
+                questionPrompt.textContent = 'Scrivi il romaji di questo carattere:';
+            }
+            
             answerOptions.classList.add('hidden');
             writingInput.classList.remove('hidden');
             nextBtn.classList.add('hidden');
@@ -574,84 +719,51 @@
             writingAnswer.focus();
         }
 
-        function setupMeaningQuestion() {
-            if (practiceScript !== 'kanji') {
-                setupRecognitionQuestion();
-                return;
-            }
-            
-            questionText.textContent = currentQuestion.char;
-            questionPrompt.textContent = 'Qual è il significato di questo kanji?';
-            answerOptions.classList.remove('hidden');
-            writingInput.classList.add('hidden');
-            nextBtn.classList.remove('hidden');
-            checkBtn.classList.add('hidden');
-
-            const correctAnswer = currentQuestion.data.meaning;
-            const allMeanings = Object.values(kanji).map(k => k.meaning);
-            const options = [correctAnswer];
-            
-            while (options.length < 4) {
-                const randomMeaning = allMeanings[Math.floor(Math.random() * allMeanings.length)];
-                if (!options.includes(randomMeaning)) {
-                    options.push(randomMeaning);
-                }
-            }
-            
-            options.sort(() => Math.random() - 0.5);
-            
-            answerOptions.innerHTML = '';
-            options.forEach(option => {
-                const button = document.createElement('button');
-                button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium';
-                button.textContent = option;
-                button.addEventListener('click', () => checkRecognitionAnswer(option, correctAnswer));
-                answerOptions.appendChild(button);
-            });
-        }
-
         function setupConversionQuestion() {
             if (practiceScript === 'kanji') {
                 setupRecognitionQuestion();
                 return;
             }
             
-            const isHiraganaToKatakana = Math.random() > 0.5;
-            let sourceChar, targetChar, prompt;
+            // Convert between hiragana and katakana
+            const isHiraganaToKatakana = practiceScript === 'hiragana';
+            let targetChar, correctAnswer, allAnswers;
             
             if (isHiraganaToKatakana) {
-                // Convert hiragana to katakana
-                const hiraganaChars = Object.keys(hiraganaToKatakana);
-                sourceChar = hiraganaChars[Math.floor(Math.random() * hiraganaChars.length)];
-                targetChar = hiraganaToKatakana[sourceChar];
-                prompt = 'Converti questo hiragana in katakana:';
+                // Find corresponding katakana
+                const romaji = currentQuestion.data.romaji;
+                targetChar = Object.keys(katakana).find(k => katakana[k].romaji === romaji);
+                if (!targetChar) {
+                    setupRecognitionQuestion();
+                    return;
+                }
+                correctAnswer = targetChar;
+                allAnswers = Object.keys(katakana);
+                questionPrompt.textContent = 'Converti questo hiragana in katakana:';
             } else {
-                // Convert katakana to hiragana
-                const katakanaToHiragana = Object.fromEntries(
-                    Object.entries(hiraganaToKatakana).map(([h, k]) => [k, h])
-                );
-                const katakanaChars = Object.keys(katakanaToHiragana);
-                sourceChar = katakanaChars[Math.floor(Math.random() * katakanaChars.length)];
-                targetChar = katakanaToHiragana[sourceChar];
-                prompt = 'Converti questo katakana in hiragana:';
+                // Find corresponding hiragana
+                const romaji = currentQuestion.data.romaji;
+                targetChar = Object.keys(hiragana).find(h => hiragana[h].romaji === romaji);
+                if (!targetChar) {
+                    setupRecognitionQuestion();
+                    return;
+                }
+                correctAnswer = targetChar;
+                allAnswers = Object.keys(hiragana);
+                questionPrompt.textContent = 'Converti questo katakana in hiragana:';
             }
             
-            currentQuestion = { char: sourceChar, correct: targetChar };
-            
-            questionText.textContent = sourceChar;
-            questionPrompt.textContent = prompt;
+            questionText.textContent = currentQuestion.char;
             answerOptions.classList.remove('hidden');
             writingInput.classList.add('hidden');
             nextBtn.classList.remove('hidden');
             checkBtn.classList.add('hidden');
 
-            const options = [targetChar];
-            const allTargets = isHiraganaToKatakana ? Object.values(hiraganaToKatakana) : Object.keys(hiraganaToKatakana);
-            
+            const options = [correctAnswer];
             while (options.length < 4) {
-                const randomTarget = allTargets[Math.floor(Math.random() * allTargets.length)];
-                if (!options.includes(randomTarget)) {
-                    options.push(randomTarget);
+                const randomAnswer = allAnswers[Math.floor(Math.random() * allAnswers.length)];
+                if (!options.includes(randomAnswer)) {
+                    options.push(randomAnswer);
                 }
             }
             
@@ -660,11 +772,82 @@
             answerOptions.innerHTML = '';
             options.forEach(option => {
                 const button = document.createElement('button');
-                button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium japanese-font text-xl';
+                button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium japanese-font text-2xl';
                 button.textContent = option;
-                button.addEventListener('click', () => checkRecognitionAnswer(option, targetChar));
+                button.addEventListener('click', () => checkRecognitionAnswer(option, correctAnswer));
                 answerOptions.appendChild(button);
             });
+        }
+
+        function setupKanjiReadingQuestion() {
+            if (practiceScript !== 'kanji') {
+                setupRecognitionQuestion();
+                return;
+            }
+            
+            const isKunYomi = Math.random() > 0.5;
+            
+            if (isKunYomi) {
+                questionText.textContent = currentQuestion.char;
+                questionPrompt.textContent = 'Qual è la lettura kun-yomi di questo kanji?';
+                
+                const correctAnswer = currentQuestion.data.kunyomi;
+                const allAnswers = Object.values(kanji).map(k => k.kunyomi);
+                
+                const options = [correctAnswer];
+                while (options.length < 4) {
+                    const randomAnswer = allAnswers[Math.floor(Math.random() * allAnswers.length)];
+                    if (!options.includes(randomAnswer)) {
+                        options.push(randomAnswer);
+                    }
+                }
+                
+                options.sort(() => Math.random() - 0.5);
+                
+                answerOptions.classList.remove('hidden');
+                writingInput.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+                checkBtn.classList.add('hidden');
+                
+                answerOptions.innerHTML = '';
+                options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium japanese-font';
+                    button.textContent = option;
+                    button.addEventListener('click', () => checkRecognitionAnswer(option, correctAnswer));
+                    answerOptions.appendChild(button);
+                });
+            } else {
+                questionText.textContent = currentQuestion.char;
+                questionPrompt.textContent = 'Qual è la lettura on-yomi di questo kanji?';
+                
+                const correctAnswer = currentQuestion.data.onyomi;
+                const allAnswers = Object.values(kanji).map(k => k.onyomi);
+                
+                const options = [correctAnswer];
+                while (options.length < 4) {
+                    const randomAnswer = allAnswers[Math.floor(Math.random() * allAnswers.length)];
+                    if (!options.includes(randomAnswer)) {
+                        options.push(randomAnswer);
+                    }
+                }
+                
+                options.sort(() => Math.random() - 0.5);
+                
+                answerOptions.classList.remove('hidden');
+                writingInput.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+                checkBtn.classList.add('hidden');
+                
+                answerOptions.innerHTML = '';
+                options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium japanese-font';
+                    button.textContent = option;
+                    button.addEventListener('click', () => checkRecognitionAnswer(option, correctAnswer));
+                    answerOptions.appendChild(button);
+                });
+            }
         }
 
         function checkRecognitionAnswer(selected, correct) {
@@ -673,9 +856,9 @@
             
             if (isCorrect) {
                 score++;
-                showFeedback('正解！🎉 (Corretto!)', 'bg-green-100 text-green-800');
+                showFeedback('正解! 🎉 (Corretto!)', 'bg-green-100 text-green-800');
             } else {
-                showFeedback(`間違い。La risposta corretta è: ${correct}`, 'bg-red-100 text-red-800');
+                showFeedback(`間違い. La risposta corretta è: ${correct}`, 'bg-red-100 text-red-800');
             }
             
             updateScore();
@@ -697,16 +880,16 @@
             
             let correctAnswer;
             if (practiceScript === 'kanji') {
-                correctAnswer = currentQuestion.data.reading.toLowerCase();
+                correctAnswer = currentQuestion.data.kunyomi.toLowerCase();
             } else {
-                correctAnswer = currentQuestion.data.toLowerCase();
+                correctAnswer = currentQuestion.data.romaji.toLowerCase();
             }
             
             if (userAnswer === correctAnswer) {
                 score++;
-                showFeedback('正解！🎉 (Corretto!)', 'bg-green-100 text-green-800');
+                showFeedback('正解! 🎉 (Corretto!)', 'bg-green-100 text-green-800');
             } else {
-                showFeedback(`間違い。La risposta corretta è: ${correctAnswer}`, 'bg-red-100 text-red-800');
+                showFeedback(`間違い. La risposta corretta è: ${correctAnswer}`, 'bg-red-100 text-red-800');
             }
             
             updateScore();
@@ -747,5 +930,5 @@
         renderCharacterGrid();
         updateExerciseInfo();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970be5d5c428edc0',t:'MTc1NTQ2MjI5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970c229db4770e8f',t:'MTc1NTQ2NDc4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
