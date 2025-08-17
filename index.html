@@ -574,10 +574,19 @@
                             </div>
                         `;
                     } else {
+                        // Find corresponding character in other script
+                        let correspondingChar = '';
+                        if (currentScript === 'hiragana') {
+                            correspondingChar = Object.keys(katakana).find(k => katakana[k].romaji === info.romaji) || '';
+                        } else if (currentScript === 'katakana') {
+                            correspondingChar = Object.keys(hiragana).find(h => hiragana[h].romaji === info.romaji) || '';
+                        }
+                        
                         card.innerHTML = `
                             <div class="flex flex-col items-center space-y-3">
                                 <div class="text-6xl japanese-font font-bold text-gray-800">${char}</div>
                                 <div class="romaji-badge px-4 py-2 rounded-full text-sm font-bold">${info.romaji}</div>
+                                ${correspondingChar ? `<div class="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold japanese-font">${correspondingChar}</div>` : ''}
                                 <div class="text-xs text-gray-500 capitalize">${info.type}</div>
                             </div>
                         `;
@@ -597,10 +606,19 @@
                             </div>
                         `;
                     } else {
+                        // Find corresponding character in other script
+                        let correspondingChar = '';
+                        if (currentScript === 'hiragana') {
+                            correspondingChar = Object.keys(katakana).find(k => katakana[k].romaji === info.romaji) || '';
+                        } else if (currentScript === 'katakana') {
+                            correspondingChar = Object.keys(hiragana).find(h => hiragana[h].romaji === info.romaji) || '';
+                        }
+                        
                         card.innerHTML = `
                             <div class="flex flex-col items-center space-y-2">
                                 <div class="text-5xl japanese-font font-bold text-gray-800">${char}</div>
                                 <div class="romaji-badge px-4 py-2 rounded-full text-sm font-bold">${info.romaji}</div>
+                                ${correspondingChar ? `<div class="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold japanese-font">${currentScript === 'hiragana' ? 'カタカナ: ' : 'ひらがな: '}${correspondingChar}</div>` : ''}
                                 <div class="meaning-text px-3 py-1 rounded-lg text-xs text-gray-700 capitalize font-medium">${info.type}</div>
                             </div>
                         `;
@@ -723,28 +741,26 @@
             
             // Convert between hiragana and katakana
             const isHiraganaToKatakana = practiceScript === 'hiragana';
-            let targetChar, correctAnswer, allAnswers;
+            let correctAnswer, allAnswers;
             
             if (isHiraganaToKatakana) {
                 // Find corresponding katakana
                 const romaji = currentQuestion.data.romaji;
-                targetChar = Object.keys(katakana).find(k => katakana[k].romaji === romaji);
-                if (!targetChar) {
+                correctAnswer = Object.keys(katakana).find(k => katakana[k].romaji === romaji);
+                if (!correctAnswer) {
                     setupRecognitionQuestion();
                     return;
                 }
-                correctAnswer = targetChar;
                 allAnswers = Object.keys(katakana);
                 questionPrompt.textContent = 'Converti questo hiragana in katakana:';
             } else {
                 // Find corresponding hiragana
                 const romaji = currentQuestion.data.romaji;
-                targetChar = Object.keys(hiragana).find(h => hiragana[h].romaji === romaji);
-                if (!targetChar) {
+                correctAnswer = Object.keys(hiragana).find(h => hiragana[h].romaji === romaji);
+                if (!correctAnswer) {
                     setupRecognitionQuestion();
                     return;
                 }
-                correctAnswer = targetChar;
                 allAnswers = Object.keys(hiragana);
                 questionPrompt.textContent = 'Converti questo katakana in hiragana:';
             }
@@ -926,5 +942,5 @@
         renderCharacterGrid();
         updateExerciseInfo();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970c4f93f4ebed56',t:'MTc1NTQ2NjYyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970c76b8c31c0e77',t:'MTc1NTQ2ODIzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
